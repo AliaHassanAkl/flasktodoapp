@@ -9,7 +9,7 @@ jobs:
       - run:
           name: build-todo-image 
           command: |
-            docker builg --tag=flasktodoapp:${CIRCLE_BUILD_NUM} .
+            docker build --tag=flasktodoapp:${CIRCLE_BUILD_NUM} .
             docker images
       - run:
           name: pushTodoapp
