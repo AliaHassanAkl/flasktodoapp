@@ -9,13 +9,13 @@ jobs:
       - run:
           name: build-todo-image 
           command: |
-            docker builg --tag=new-flask-todo-app:${CIRCLE_BUILD_NUM} .
+            docker builg --tag=new-flasktodoapp:${CIRCLE_BUILD_NUM} .
             docker images
       - run:
           name: pushTodoapp
           command: |
-            dockerpath=aliahassanakl/flask-todo-app:${CIRCLE_BUILD_NUM}
-            docker tag flask-todo-app:${CIRCLE_BUILD_NUM} $dockerpath
+            dockerpath=aliahassanakl/flasktodoapp:${CIRCLE_BUILD_NUM}
+            docker tag flasktodoapp:${CIRCLE_BUILD_NUM} $dockerpath
             echo "docker id and image : $dockerpath"
             echo "$DOCKER_PASS" | docker login --username $DOCKER_USER  --password-stdin
             docker image push $dockerpath
