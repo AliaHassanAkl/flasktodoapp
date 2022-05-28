@@ -14,7 +14,7 @@ jobs:
       - run:
           name: pushTodoapp
           command: |
-            dockerpath=aliahassanakl/flasktodoapp:${CIRCLE_BUILD_NUM}
+            dockerpath="aliahassanakl/flasktodoapp:${CIRCLE_BUILD_NUM}"
             docker tag flasktodoapp:${CIRCLE_BUILD_NUM} $dockerpath
             echo "docker id and image : $dockerpath"
             echo "$DOCKER_PASS" | docker login --username $DOCKER_USER  --password-stdin
