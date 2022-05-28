@@ -1,0 +1,25 @@
+version: 2.1
+jobs:
+  build-todo-image:
+    docker:
+      - image: cimg/go:1.17
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: build-todo-image 
+          command: |
+            docker builg --tag=new-flask-todo-app:${CIRCLE_BUILD_NUM} .
+            docker images
+      - run:
+          name: pushTodoapp
+          command: |
+            dockerpath=aliahassanakl/flask-todo-app:${CIRCLE_BUILD_NUM}
+            docker tag flask-todo-app:${CIRCLE_BUILD_NUM} $dockerpath
+            echo "docker id and image : $dockerpath"
+            echo "$DOCKER_PASS" | docker login --username $DOCKER_USER  --password-stdin
+            docker image push $dockerpath
+workflows:
+  docker:
+    jobs:
+      - build-todo-image
